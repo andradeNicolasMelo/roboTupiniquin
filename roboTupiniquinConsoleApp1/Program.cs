@@ -5,10 +5,17 @@
         static void Main(string[] args)
         {
             DefinidorGrid definidorGrid = new DefinidorGrid();
-
             definidorGrid.TamanhoGrid();
 
-            Console.WriteLine($"Eixo X: {definidorGrid.gridEixoX}, Eixo Y: {definidorGrid.gridEixoY}");
+            DefinidorRobo dudu = new DefinidorRobo();
+            dudu.Exploracao();
+
+            Console.WriteLine($"Eixo X grid: {definidorGrid.gridEixoX}, Eixo Y grid: {definidorGrid.gridEixoY}");
+            Console.WriteLine();
+
+            Console.WriteLine($"Eixo X robo: {dudu.roboEixoX}, Eixo Y robo: {dudu.roboEixoY}, direção robo: {dudu.direcao}");
+            Console.WriteLine(dudu.comandosIndividuaisRobo);
+            Console.WriteLine();
 
             Console.ReadLine();
         }
