@@ -10,11 +10,12 @@ namespace roboTupiniquinConsoleApp1
         public int gridEixoY;
         public void TamanhoGrid()
         {
-            Console.Write("Tamanho do grid: ");
             string gridInsercaoValores = "5 5";
             Console.WriteLine();
 
             Tratador(gridInsercaoValores);
+
+
         }
 
         public void Tratador(string gridInsercaoValores)
