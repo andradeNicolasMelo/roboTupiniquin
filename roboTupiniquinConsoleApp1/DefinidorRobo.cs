@@ -8,17 +8,20 @@ namespace roboTupiniquinConsoleApp1
         public int roboEixoY;
         public char direcao;
 
+        DefinidorGrid grid = new DefinidorGrid();
+      
 
         public void Exploracao()
         {
+            grid.TamanhoGrid();
             Console.WriteLine("Qual a posição do robô e para onde ele esta olhando? ");
-            string entradaPosicaoInicialRobo = "3 3 L";
+            string entradaPosicaoInicialRobo = "-7 5 N";
             Console.WriteLine();
 
             TratamentoValoresCoordedasRobo(entradaPosicaoInicialRobo);
             
             Console.WriteLine("Qual a posição do robô e para onde ele esta olhando? ");
-            string movimentacaDoRobo = "MMDMMDMDDM";
+            string movimentacaDoRobo = "MMMDDDE";
             Console.WriteLine();
 
             char[] comandosIndividuaisRobo = movimentacaDoRobo.ToCharArray();
@@ -54,6 +57,7 @@ namespace roboTupiniquinConsoleApp1
                 else if (comandoAtual == 'M')
                 {
                     Mover();
+                    EvitadorDeUltrapassagem();
                 }
             }
 
@@ -129,5 +133,26 @@ namespace roboTupiniquinConsoleApp1
                 roboEixoX--;
             }
         }
+
+        public void EvitadorDeUltrapassagem()
+        {
+            while (roboEixoX > grid.gridEixoX)
+            {
+                roboEixoX--;
+            }
+            while (roboEixoX < 0)
+            {
+                roboEixoX++;
+            }
+            while (roboEixoY > grid.gridEixoY)
+            {
+                roboEixoY--;
+            }
+            while(roboEixoY < 0)
+            {
+                roboEixoY++;
+            }
+        }
+
     }
 }
