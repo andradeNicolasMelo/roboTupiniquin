@@ -10,20 +10,35 @@ namespace roboTupiniquinConsoleApp1
         public int gridEixoY;
         public void TamanhoGrid()
         {
-            string gridInsercaoValores = "5 5";
-            Console.WriteLine();
+            bool noWhile = true;
+            do
+            {
+                Console.WriteLine("Qual o tamanho do While? ");
+                string tamanho = Console.ReadLine();
 
-            Tratador(gridInsercaoValores);
+                string[] eixosIndividuais = tamanho.Split(" ");
 
+                if(eixosIndividuais.Length != 2)
+                {
+                    Console.WriteLine("Erro: voce deve digitar 2 valores");
+                    continue;
+                }
 
-        }
+                if (!int.TryParse(eixosIndividuais[0], out gridEixoX))
+                {
+                    Console.WriteLine("Erro: O primiro valor não é um numero");
+                    continue;
+                }
 
-        public void Tratador(string gridInsercaoValores)
-        {
-            string[] TamanhoDeCadaEixo = gridInsercaoValores.Split(' ');
+                if (!int.TryParse(eixosIndividuais[1], out gridEixoX))
+                {
+                    Console.WriteLine("Erro: O segundo valor não é um numero");
+                    continue;
+                }
 
-            gridEixoX = Convert.ToInt32(TamanhoDeCadaEixo[0]);
-            gridEixoY = Convert.ToInt32(TamanhoDeCadaEixo[1]);
+                noWhile = false;
+
+            } while (noWhile);
         }
     }
 }

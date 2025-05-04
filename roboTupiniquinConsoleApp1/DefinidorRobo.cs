@@ -9,33 +9,83 @@ namespace roboTupiniquinConsoleApp1
         public char direcao;
 
         DefinidorGrid grid = new DefinidorGrid();
-      
+
+        private string entradaPosicaoInicialRobo;
+        private string movimentacaDoRobo;
 
         public void Exploracao()
         {
             grid.TamanhoGrid();
-            Console.WriteLine("Qual a posição do robô e para onde ele esta olhando? ");
-            string entradaPosicaoInicialRobo = "-7 5 N";
-            Console.WriteLine();
 
-            TratamentoValoresCoordedasRobo(entradaPosicaoInicialRobo);
+            TratamentoValoresCoordedasRobo();
             
-            Console.WriteLine("Qual a posição do robô e para onde ele esta olhando? ");
-            string movimentacaDoRobo = "MMMDDDE";
-            Console.WriteLine();
-
             char[] comandosIndividuaisRobo = movimentacaDoRobo.ToCharArray();
 
             Console.WriteLine(MovimentacaoDoRobo(comandosIndividuaisRobo));
         }
 
-        public void TratamentoValoresCoordedasRobo(string entradaPosicaoInicialRobo)
-        {
-            string[] CoordenadasPosiciaoInicialRobo = entradaPosicaoInicialRobo.Split(' ');
+       
 
-            roboEixoX = Convert.ToInt32(CoordenadasPosiciaoInicialRobo[0]);
-            roboEixoY = Convert.ToInt32(CoordenadasPosiciaoInicialRobo[1]);
-            direcao = Convert.ToChar(CoordenadasPosiciaoInicialRobo[2]);
+        public void TratamentoValoresCoordedasRobo()
+        {
+            bool usuarioNoWhile = true;
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("Qual a posição do robô e para onde ele esta olhando? ");
+                entradaPosicaoInicialRobo = Console.ReadLine()!;
+                
+                string[] CoordenadasPosiciaoInicialRobo = entradaPosicaoInicialRobo.Split(' ');
+
+                if (CoordenadasPosiciaoInicialRobo.Length != 3)
+                {
+                    Console.WriteLine("Erro: Você deve digitar exatamente dois números e uma direção (ex: 3 4 N).");
+                    continue;
+                }
+
+                if (!int.TryParse(CoordenadasPosiciaoInicialRobo[0], out roboEixoX))
+                {
+                    Console.WriteLine("Erro: O primiro valor não é um numero");
+                    Console.ReadLine();
+                    continue;
+                }
+
+                if (!int.TryParse(CoordenadasPosiciaoInicialRobo[1], out roboEixoY))
+                {
+                    Console.WriteLine("Erro: O Segundo valor não é um numero");
+                    Console.ReadLine();
+                    continue;
+                }
+
+                direcao = CoordenadasPosiciaoInicialRobo[2].ToUpper()[0];
+                if (direcao != 'N' && direcao != 'S' && direcao != 'L' && direcao != 'O')
+                {
+
+                    Console.WriteLine("É necessario que você digite os seguintes valore:");
+                    Console.WriteLine("N - Norte   | S - Sul   | L - Leste   | O - Oeste");
+                    Console.ReadLine();
+
+                    continue;
+                }
+
+                usuarioNoWhile = false;
+
+            } while (usuarioNoWhile);
+
+            do
+            {
+                Console.Clear();
+                Console.WriteLine("Qual a movimentação do robo? ");
+                movimentacaDoRobo = Console.ReadLine()!.ToUpper();
+
+                if (!movimentacaDoRobo.Contains("M") && !movimentacaDoRobo.Contains("E") && !movimentacaDoRobo.Contains("D"))
+                {
+                    Console.WriteLine("Erro: Necessario que o valor inserido tenha: M ou D ou E");
+                    continue;
+                }
+
+                usuarioNoWhile = true;
+            } while (!usuarioNoWhile);
         }
 
         public string MovimentacaoDoRobo(char[] comando)
